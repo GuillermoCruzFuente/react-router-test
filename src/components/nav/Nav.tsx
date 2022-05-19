@@ -19,7 +19,7 @@ const Nav = () => {
             from: location.pathname,
             to: to
         })
-        await timer(1000)
+        await timer(400)
         navigate(to)
     }
 
@@ -38,7 +38,7 @@ const Nav = () => {
                 </div>
             </nav>
 
-            <div>
+            <div style={{ width: '70%', margin: '2rem auto' }}>
                 <Outlet context={clickedLink} />
             </div>
         </>

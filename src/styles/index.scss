@@ -1,3 +1,18 @@
 @import "reset.scss";
 @import "typo.scss";
 @import "variables.scss";
+
+body {
+    background-color: #181818;
+}
+
+h1,
+h2 {
+    color: #999;
+    font-weight: 900;
+}
+
+p {
+    color: #666;
+    font-weight: 400;
+}
