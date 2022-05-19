@@ -9,20 +9,21 @@ import Contact from './routes/contact/Contact'
 import Home from './routes/home/Home'
 import Projects from './routes/projects/Projects'
 
+//CSSTransition classes
+import './styles/css-transition.scss'
+
 const App = () => {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Nav />}>
-            <Route index element={<Home />} />
-            <Route path='about' element={<About />} />
-            <Route path='projects' element={<Projects />} />
-            <Route path='contact' element={<Contact />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Nav />}>
+          <Route index element={<Home />} />
+          <Route path='about' element={<About />} />
+          <Route path='projects' element={<Projects />} />
+          <Route path='contact' element={<Contact />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
