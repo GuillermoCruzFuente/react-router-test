@@ -1,26 +1,29 @@
 import { useEffect, useRef, useState } from "react"
-import { useLocation, useOutletContext } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import { CSSTransition } from 'react-transition-group'
 
-import { Navigation } from "../../types/Navigation"
+import { useNavSignal, ContextType } from "../../components/nav/Nav"
 
 const Home = () => {
-    const navigationItem: Navigation = useOutletContext()
+    const { nav, reactiveFunc }: ContextType = useNavSignal()
     const location = useLocation()
     const refContainer = useRef<HTMLHeadElement>(null)
     const [sectionState, setSectionState] = useState(false)
 
     useEffect(() => {
         showContent()
-    }, [])
-
-    useEffect(() => {
-        if (navigationItem) {
-            if (navigationItem.to != location.pathname) {
+        console.log('home nav state:', nav)
+        if (nav) {
+            console.log(nav.to)
+            if (nav.to != location.pathname) {
                 hideContent()
             }
         }
-    }, [navigationItem])
+
+        return () => {
+            console.log('home unmounted')
+        }
+    }, [nav])
 
     const showContent = () => {
         setSectionState(true)
@@ -31,7 +34,7 @@ const Home = () => {
     }
 
     return (
-        <CSSTransition in={sectionState} nodeRef={refContainer} timeout={800} classNames="page" mountOnEnter unmountOnExit>
+        <CSSTransition in={sectionState} nodeRef={refContainer} timeout={350} classNames="page" mountOnEnter unmountOnExit onExited={() => reactiveFunc(true)}>
             <header ref={refContainer}>
                 <h1>Home section</h1>
                 <p>
